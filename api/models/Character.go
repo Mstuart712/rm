@@ -56,14 +56,14 @@ func (p *Character) FindAllCharacters(db *gorm.DB) (*[]Character, error) {
 	if err != nil {
 		return &[]Character{}, err
 	}
-	if len(characters) > 0 {
-		for i, _ := range characters {
-			err := db.Debug().Model(&User{}).Where("id = ?", characters[i].OwnerID).Take(&characters[i].OwnerID).Error
-			if err != nil {
-				return &[]Character{}, err
-			}
-		}
-	}
+	// if len(characters) > 0 {
+	// 	for i, _ := range characters {
+	// 		err := db.Debug().Model(&User{}).Where("id = ?", characters[i].OwnerID).Take(&characters[i].OwnerID).Error
+	// 		if err != nil {
+	// 			return &[]Character{}, err
+	// 		}
+	// 	}
+	// }
 	return &characters, nil
 }
 
@@ -73,12 +73,12 @@ func (c *Character) FindCharacterByID(db *gorm.DB, pid uint64) (*Character, erro
 	if err != nil {
 		return &Character{}, err
 	}
-	if c.ID != 0 {
-		err = db.Debug().Model(&User{}).Where("id = ?", c.Name).Take(&c.Name).Error
-		if err != nil {
-			return &Character{}, err
-		}
-	}
+	// if c.ID != 0 {
+	// 	err = db.Debug().Model(&User{}).Where("id = ?", c.OwnerID).Take(&c.Name).Error
+	// 	if err != nil {
+	// 		return &Character{}, err
+	// 	}
+	// }
 	return c, nil
 }
 
