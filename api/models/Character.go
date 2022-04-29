@@ -49,22 +49,23 @@ func (c *Character) SaveCharacter(db *gorm.DB) (*Character, error) {
 	return c, nil
 }
 
-func (p *Character) FindAllCharacters(db *gorm.DB) (*[]Character, error) {
+func (c *Character) FindAllCharacters(db *gorm.DB) (*[]Character, error) {
 	var err error
 	characters := []Character{}
 	err = db.Debug().Model(&Character{}).Limit(100).Find(&characters).Error
 	if err != nil {
 		return &[]Character{}, err
 	}
-	// if len(characters) > 0 {
-	// 	for i, _ := range characters {
-	// 		err := db.Debug().Model(&User{}).Where("id = ?", characters[i].OwnerID).Take(&characters[i].OwnerID).Error
-	// 		if err != nil {
-	// 			return &[]Character{}, err
-	// 		}
-	// 	}
-	// }
 	return &characters, nil
+}
+
+func (c *Character) GetValnar(db *gorm.DB) (*Character, error) {
+	var err error
+	err = db.Debug().Model(&Character{}).Where("id = ?", 3).Take(&c).Error
+	if err != nil {
+		return &Character{}, err
+	}
+	return c, nil
 }
 
 func (c *Character) FindCharacterByID(db *gorm.DB, pid uint64) (*Character, error) {
@@ -73,12 +74,6 @@ func (c *Character) FindCharacterByID(db *gorm.DB, pid uint64) (*Character, erro
 	if err != nil {
 		return &Character{}, err
 	}
-	// if c.ID != 0 {
-	// 	err = db.Debug().Model(&User{}).Where("id = ?", c.OwnerID).Take(&c.Name).Error
-	// 	if err != nil {
-	// 		return &Character{}, err
-	// 	}
-	// }
 	return c, nil
 }
 

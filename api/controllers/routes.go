@@ -21,6 +21,7 @@ func (s *Server) initializeRoutes() {
 	s.Router.HandleFunc("/characters", middlewares.SetMiddlewareJSON(s.CreateCharacter)).Methods("POST")
 	s.Router.HandleFunc("/characters", middlewares.SetMiddlewareJSON(s.GetCharacters)).Methods("GET")
 	s.Router.HandleFunc("/characters/{id}", middlewares.SetMiddlewareJSON(s.GetCharacter)).Methods("GET")
+	s.Router.HandleFunc("/characters/{getValnar}", middlewares.SetMiddlewareJSON(s.GetValnar)).Methods("GET")
 	s.Router.HandleFunc("/characters/{id}", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(s.UpdateCharacter))).Methods("PUT")
 	s.Router.HandleFunc("/characters/{id}", middlewares.SetMiddlewareAuthentication(s.DeleteCharacter)).Methods("DELETE")
 }

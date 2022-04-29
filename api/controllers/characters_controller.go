@@ -65,6 +65,20 @@ func (server *Server) GetCharacters(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, characters)
 }
 
+func (server *Server) GetValnar(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	//valar, err := strconv.ParseUint(vars["getValnar"], 10, 64)
+	fmt.Println(vars)
+	character := models.Character{}
+
+	characterReceived, err := character.GetValnar(server.DB)
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+	responses.JSON(w, http.StatusOK, characterReceived)
+}
+
 func (server *Server) GetCharacter(w http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)
