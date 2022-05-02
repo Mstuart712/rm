@@ -6,9 +6,11 @@ import (
 
 	"github.com/Mstuart712/rm/api/auth"
 	"github.com/Mstuart712/rm/api/responses"
+	"github.com/Mstuart712/rm/api/token"
 )
 
 func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
+	token.checkingImport()
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		next(w, r)
