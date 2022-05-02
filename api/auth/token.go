@@ -14,6 +14,7 @@ import (
 )
 
 func CreateToken(user_id uint32) (string, error) {
+	//comment for test commit
 	claims := jwt.MapClaims{}
 	claims["authorized"] = true
 	claims["user_id"] = user_id
